@@ -25,3 +25,28 @@
 </body>
 
 </html>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Note Taker</title>
+</head>
+<body>
+  <h1>Note Taker</h1>
+  <a href="/notes">View Notes</a>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(() => {
+      // Load all notes
+      $.get('/api/notes', (notes) => {
+        const $noteList = $('#note-list');
+        $noteList.empty();
+        for (const note of notes) {
+          const $noteItem = $('<li>').addClass('note-item').text(note.title);
+          $noteList.append($noteItem);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
